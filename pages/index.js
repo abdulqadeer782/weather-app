@@ -3,17 +3,22 @@ import SearchBar from '@/components/SearchBar'
 import Content from '@/components/Content'
 import { useEffect, useState } from 'react'
 import { apiClient } from '@/shared/apiClient'
+import Loader from '@/components/Loader'
 
 
 export default function Home() {
     const [errMessage, setErrMsg] = useState("")
     const [searchInput, setSearchInput] = useState('')
     const [result, setResult] = useState({})
+    const [loading,setLoading] = useState(true)
 
     const fetchWeather = (city) => {
+        setLoading(true)
         apiClient.get(`/current.json?q=${city}`).then((res) => {
             setResult(res.data)
+            setLoading(false)
         }).catch((err) => {
+            setLoading(false)
             setErrMsg(err.response?.data?.error?.message)
         })
     }
@@ -25,12 +30,22 @@ export default function Home() {
         if(errMessage){
             setTimeout(()=>{
                 setErrMsg('')
-            },3000)
+            },2000)
         }
     },[errMessage])
 
+
+    useEffect(()=>{
+        if(loading) {
+            setTimeout(() => {
+                setLoading(false)
+            }, 2000);
+        }
+    },[loading])
+
     return (
-        <main className={styles.main}>
+        <>
+        {loading ? <Loader/> :<main className={styles.main}>
             <div className="flex flex-col w-full">
                 <SearchBar setSearchInput={setSearchInput} />
                 {errMessage && <div
@@ -43,6 +58,6 @@ export default function Home() {
                 </div>}
                 {Object.keys(result).length > 0 && <Content result={result}/>}
             </div>
-        </main>
+        </main>}</>
     )
 }
