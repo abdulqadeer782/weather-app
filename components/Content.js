@@ -11,7 +11,7 @@ function Content({ result }) {
                 </div>
                 <div>
                     <h2 className='text-2xl pt-5'>
-                        Humidity : {result?.current?.humidity} <br/> Wind : {result?.current?.wind_kph} <br/> Feel Likes : {result?.current?.feelslike_c} <br/> Cloud : {result?.current?.cloud}
+                        Humidity : {result?.current?.humidity} % <br/> Wind : {result?.current?.wind_kph} km/h <br/> Feel Likes : {result?.current?.feelslike_c} <br/> Cloud : {result?.current?.cloud}
                     </h2>
                 </div>
             </div>
