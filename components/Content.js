@@ -3,7 +3,7 @@ import React from 'react'
 function Content({ result }) {
 
     return (
-        <div className="mt-10 w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div className="mt-10 w-full py-10 px-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div className='flex justify-between items-center'>
                 <div>
                     <h1 className='text-7xl'>{result?.location?.name}</h1>
